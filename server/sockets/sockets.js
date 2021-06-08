@@ -1,6 +1,9 @@
 const { io } = require('../server');
 const { Conexion } = require('../sentencias/sen_conexion');
 
+const { UsuarioSocket } = require('./UsuarioSocket')
+const Usuario = new UsuarioSocket();
+
 const { Administrativos } = require('../sentencias/sen_administrativos');
 const administrativo = new Administrativos();
 
@@ -15,14 +18,19 @@ alumno = new Alumnos();
 
 io.on('connection', (client) => {
 
-    client.on('disconnect', () => {
-
-    });
+    client.on('disconnect', () => {});
 
 
     /*
     INICIOS DE SESION
     */
+
+    client.on('LoginUsuario', (usuario, callback) => {
+        /*Usuario.Login(usuario, (loged_usuario) => {
+            return callback(loged_usuario);
+        })*/
+        return callback(usuario);
+    })
 
     client.on('adm_validarUsuario', (data, callback) => {
         if (!data.correo || !data.contrasena) {

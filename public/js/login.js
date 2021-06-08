@@ -29,8 +29,9 @@ function Login() {
 
     if (usuario.usu_cor && usuario.usu_con) {
         socket.emit('LoginUsuario', usuario, function (usuario) {
+            console.log(usuario);
             if (usuario) {
-                switch (usuario.tip_id) {
+                /*switch (usuario.tip_id) {
                     case 1:
                         Administracion(usuario.usu_id);
                         break;
@@ -43,7 +44,7 @@ function Login() {
                     default:
                         alert('Hay un error con tu cuenta, favor de comunicarte con la escuela');
                         break;
-                }
+                }*/
             } else {
                 alert('Los datos son erroneos');
             }
