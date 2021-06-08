@@ -35,6 +35,25 @@ io.on('connection', (client) => {
     })
 
 
+    /*
+     * * DIRECCION: FUNCIONES CORRECTIVAS  
+    */
+
+    // * Reinicia el estatus de todos los alumnos
+    client.on('ResetStatus', (callback) => {
+        Administrador.ResetStatus((reseted_status) => {
+            return callback(reseted_status);
+        })
+    })
+
+    //Pasar de ciclo escolar
+    client.on('PassCycle', (callback) => {
+        Administrador.PassCycle((passed_cycle) => {
+            return callback(passed_cycle);
+        })
+    })
+
+
     // * Reinicia el estatus de todos los alumnos
     client.on('ResetStatus', (callback) => {
         Administrador.ResetStatus((reseted_status) => {
