@@ -53,6 +53,112 @@ io.on('connection', (client) => {
         })
     })
 
+     /*
+     * * DIRECCION: FUNCIONES DE PROFESORES
+     */
+
+    // * Conexion de dirección con la interfaz de profesores
+    client.on('direccionProfesorConnection', (tip_id, callback) => {
+        Administrador.GetAllUsuarios(tip_id, (usuarios) => {
+            if (usuarios) {
+                Administrador.GetAllGrupos((grupos) => {
+                    var usu_gru = "Sin grupo";
+
+                    usuarios.forEach(usuario => {
+                        usuario.usu_gru = usu_gru;
+                        grupos.forEach(grupo => {
+                            if (grupo.usu_id == usuario.usu_id) {
+                                usuario.usu_gru = grupo.gru_gra + grupo.gru_nom;
+                            }
+                        });
+                    });
+                    return callback(usuarios);
+                })
+            } else {
+                return callback(false);
+            }
+        })
+    })
+
+    // * Conexion de direccion con la interfaz de editar profesores
+    client.on('direccionProfesorEditarConnection', (usu_id, callback) => {
+        Administrador.GetByIdUsuario(usu_id, (profesor) => {
+            if (profesor) {
+                Administrador.GetAllGrupos((grupos) => {
+                    if (grupos) {
+                        return callback(profesor, grupos);
+                    } else {
+                        return callback(false);
+                    }
+                })
+            } else {
+                return callback(false);
+            }
+        })
+    })
+
+    // * Registra a un nuevo profesor
+    client.on('createProfesor', (usuario, callback) => {
+        Administrador.CreateUsuario(usuario, (new_profesor) => {
+            if (new_profesor) {
+                io.emit('lastCreateProfesor', new_profesor);
+                return callback(new_profesor);
+            } else {
+                return callback(false);
+            }
+        })
+    });
+
+    // * Actualiza la informacion de un profesor
+    client.on('updateProfesor', (profesor, gru_id, changed_email, callback) => {
+
+        Administrador.UpdateUsuario(profesor, changed_email, (update_profesor) => {
+            if (update_profesor) {
+                Administrador.SetProfesorGrupo(update_profesor.usu_id, gru_id, (grupo) => {
+                    if (grupo) {
+                        update_profesor.usu_gru = grupo.gru_gra + grupo.gru_nom;
+                        update_profesor.gru_id = gru_id;
+                    } else {
+                        update_profesor.usu_gru = "Sin grupo";
+                    }
+                    io.emit('lastUpdateProfesor', update_profesor);
+                    return callback(true);
+                })
+            } else {
+                setTimeout(function () {
+                    return callback(false);
+                }, 400);
+            }
+        })
+    })
+
+    // * Elimina a un profesor
+    client.on('deleteProfesor', (profesor, callback) => {
+        Administrador.DeleteUsuario(profesor, (delete_profesor) => {    
+            if (delete_profesor) {
+                io.emit('lastDeleteProfesor', delete_profesor);         
+                return callback(delete_profesor);
+            } else {
+                return callback(false);
+            }
+        })
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // * Reinicia el estatus de todos los alumnos
     client.on('ResetStatus', (callback) => {
