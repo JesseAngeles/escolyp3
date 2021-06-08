@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="css/administrador.css" />
+    <link rel="stylesheet" href="css/txtfields.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adminsitrar Profesores</title>
+</head>
+
+<body>
+
+    <div class="IzQ">
+        <h1>Administrador</h1>
+        <br><br>
+        <button class="btn8" onclick="Salir()"></button>
+        <br><br><br><br>
+        <button class="btn5" onclick="Profesores()"></button>
+        <br><br><br><br>
+        <button class="btn6" onclick="Alumnos()"></button>
+        <br><br><br><br>
+        <button class="btn7" onclick="Contrasena()"></button>
+    </div>
+    <div class="cafe">
+
+    </div>
+    <div class="cafe2">
+    </div>
+    <div class="DER">
+        <h1>Grupos y profesores</h1>
+        <div class="DER-L">
+            <div class="derCen">
+                <h1>Registrar</h1>
+                <br><br>
+                <input type="text" id="pro_cedula" placeholder="Cedula">
+                <br>
+
+                <input type="text" id="pro_apellidoP" placeholder="Apellido Paterno" required>
+                <br>
+
+                <input type="text" id="pro_apellidoM" placeholder="Apellido Materno">
+                <br>
+
+                <input type="text" id="pro_nombre" placeholder="Nombre">
+                <br>
+
+                <input type="text" id="pro_correo" placeholder="Correo Electronico">
+                <br> <br><br>
+                <button class="btn9" onclick="RegistrarProfesor()"></button>
+                <br><br>
+            </div>
+        </div>
+        <div class="DER-R">
+            <div class="derCen">
+                <h1>Actualizar</h1>
+                <br>
+                <br>
+                <input type="hidden" id="mod_pro_preCedula" placeholder="Cedula">
+                <input type="hidden" id="mod_pro_cedula" placeholder="Cedula">
+                <br>
+                <input type="text" id="mod_pro_apellidoP" placeholder="Apellido Paterno">
+                <br>
+                <input type="text" id="mod_pro_apellidoM" placeholder="Apellido Materno">
+                <br>
+                <input type="text" id="mod_pro_nombre" placeholder="Nombre">
+                <br>
+                <input type="text" id="mod_pro_correo" placeholder="Correo Electronico">
+                <br><br><br>
+                <button class="btn11" onclick="ActualizarProfesor()"></button>
+                <button class="btn10" onclick="EliminarProfesor()"></button>
+                <br><br>
+            </div>
+        </div>
+        <div class="DER-B">
+            <br><br><b>Grupo</b>
+            <input type="text" id="grupo">
+            <br>
+            <table id="tabla_profesores" border="1">
+                <tr>
+                    <th>CEDULA</th>
+                    <th>NOMBRE</th>
+                    <th>APELLIDO PATERNO</th>
+                    <th>APELLIDO MATERNO</th>
+                    <th>GRUPO</th>
+                    <th>BOTON</th>
+                </tr>
+            </table>
+            <br><br>
+
+        </div>
+
+    </div>
+
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+
+    <script type="text/javascript">
+        emailjs.init('user_xl8j45L8MMHRsxfK7kE3r')
+    </script>
+    <script type="text/javascript">
+        emailjs.init('user_xl8j45L8MMHRsxfK7kE3r')
+    </script>
+    <script src="../socket.io/socket.io.js"></script>
+    <script src="../js/adm/profesores.js"></script>
+</body>
+
+</html>

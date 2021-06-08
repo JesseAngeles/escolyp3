@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="css copy/administrador.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutor</title>
+</head>
+
+<body>
+    <div class="IzQ">
+        <h1>Tutor</h1>
+        <br><br>
+        <button class="btn8" onclick="Salir()"></button>
+        <br><br><br><br>
+        <button class="btn16" onclick="Salida()"></button>
+        <br><br><br><br>
+        <button class="btn17" onclick="Llegada()"></button>
+        <br><br><br><br>
+        <button class="btn15" onclick="Emergencia()"></button>
+        <br><br><br><br>
+        <button class="btn7" onclick="CambiarContrasena()"></button>
+    </div>
+    <div class="cafe">
+    </div>
+    <div class="cafe2">
+    </div>
+    <div class="DER">
+
+        <div class="derCen">
+            <h1>Alumno</h1>
+            <br> Nombre del alumno:
+            <br>
+            <p id="nombre"></p>
+            <br><br> Grupo:
+            <br>
+            <p id="grupo"></p>
+            <br><br> Profesor:
+            <br>
+            <p id="profesor"></p>
+            <br><br>
+        </div>
+    </div>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="js/tutor.js"></script>
+</body>
+
+</html>

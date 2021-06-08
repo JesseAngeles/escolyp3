@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="css/administrador.css" />
+    <link rel="stylesheet" href="css/txtfields.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar Alumnos</title>
+</head>
+
+<body>
+    <div class="IzQ">
+        <h1>Administrador</h1>
+        <br><br>
+        <button class="btn8" onclick="Salir()"></button>
+        <br><br><br><br>
+        <button class="btn5" onclick="Profesores()"></button>
+        <br><br><br><br>
+        <button class="btn6" onclick="Alumnos()"></button>
+        <br><br><br><br>
+        <button class="btn7" onclick="Contrasena()"></button>
+    </div>
+    <div class="cafe">
+
+    </div>
+    <div class="cafe2">
+    </div>
+    <div class="DER">
+        <h1>Alumnos</h1>
+        <div class="DER-L">
+            <div class="derCen">
+                <h1>Registrar</h1>
+                <br><br>
+
+                <input type="text" id="alu_generacion" placeholder="Generacion">
+                <br><br>
+                <input type="text" id="alu_apellidoP" placeholder="Apellido paterno">
+                <br><br>
+                <input type="text" id="alu_apellidoM" placeholder="Apellido materno">
+                <br><br>
+                <input type="text" id="alu_nombre" placeholder="Nombre">
+                <br><br>
+                <button class="btn9" onclick="RegistrarAlumno()"></button>
+                <br><br>
+            </div>
+        </div>
+
+        </select>
+        <div class="DER-R">
+            <div class="derCen">
+                <h1>Actualizar</h1>
+
+                <input type="hidden" id="mod_alu_id">
+                <br><br>
+                <input type="text" id="mod_alu_generacion" placeholder="Generacion">
+                <br><br>
+                <input type="text" id="mod_alu_apellidoP" placeholder="Apellido paterno">
+                <br> <br>
+                <input type="text" id="mod_alu_apellidoM" placeholder="Apellido materno">
+                <br><br>
+                <input type="text" id="mod_alu_nombre" placeholder="Nombre">
+                <br><br>
+                <button class="btn11" onclick="ActualizarAlumno()"></button>
+                <button class="btn10" onclick="EliminarAlumno()"></button>
+                <button class="btn12" onclick="Tutores()"></button>
+                <br><br>
+            </div>
+        </div>
+        <div class="DER-B">
+            <table id="tabla_alumnos" border="1">
+                <tr id="cabecera">
+                    <th>GENERACION</th>
+                    <th>NOMBRE</th>
+                    <th>APELLIDO PATERNO</th>
+                    <th>APELLIDO MATERNO</th>
+                    <th>GRUPO</th>
+                    <th>BOTON</th>
+                </tr>
+            </table>
+            <select id="listado_grupos" onchange="Filtrar()"></select>
+        </div>
+
+
+        <script src="../socket.io/socket.io.js"></script>
+        <script src="../js/adm/alumnos.js"></script>
+</body>
+
+</html>
