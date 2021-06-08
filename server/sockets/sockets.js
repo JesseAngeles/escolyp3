@@ -1,9 +1,6 @@
 const { io } = require('../server');
 const { Conexion } = require('../sentencias/sen_conexion');
 
-const { UsuarioSocket } = require('./UsuarioSocket')
-const Usuario = new UsuarioSocket();
-
 const { Administrativos } = require('../sentencias/sen_administrativos');
 const administrativo = new Administrativos();
 
