@@ -1,11 +1,11 @@
 const { io } = require('../server');
 
-/*const { DBUsuario } = require('../DBConnection/DBUsuario')
+const { DBUsuario } = require('../DBConnection/DBUsuario')
 const Usuario = new DBUsuario();
-*/
+
 const { DBAlumno } = require('../DBConnection/DBAlumno')
 const Alumno = new DBAlumno();
-/*
+
 const { DBGrupo } = require('../DBConnection/DBGrupo')
 const Grupo = new DBGrupo();
 
@@ -13,10 +13,10 @@ const { Password } = require('../Password')
 const password = new Password();
 
 const { Mailer } = require('../Mailer');
-const mail = new Mailer();*/
+const mail = new Mailer();
 
 class AdministradorSocket {
-/*
+
     //USUARIOS
 
     //Crear usuario
@@ -156,7 +156,7 @@ class AdministradorSocket {
             return callback(err);
         })
     }
-*/
+
     //Reinicia el estatus de todos los alumnos
     ResetStatus(callback) {
         Alumno.ResetStatus((err, res) => {
@@ -166,7 +166,7 @@ class AdministradorSocket {
             return callback(res);
         })
     }
-/*
+
     //GRUPOS
 
     //Obtiene todos los grupos
@@ -277,7 +277,6 @@ class AdministradorSocket {
         }))
         return callback(validation);
     }
-    */
 }
 
 module.exports = {
