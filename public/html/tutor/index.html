@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Index Admin</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../../css/tutorResources.css'>
+
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <script src="../../socket.io/socket.io.js"></script>
+    <script src='../../js/tutor/index.js'></script>
+    <script src='../../js/tutor/Navegacion.js'></script>
+</head>
+
+<body>
+    <input type="checkbox" name="" id="hamburguesa">
+    <div class="barra-lateral">
+
+        <div class="lateral-titulo">
+            <span><img src="../../css/img/Logo-Escoly sin letras.png"></span>
+        </div>
+        <div class="menu-lateral">
+            <ul>
+                <li>
+                    <a onclick="index()" class="activo"><span class="las la-undo"></span><span>Pagina
+                            Principal</span></a>
+                </li>
+                <li>
+                    <a onclick="PasswordTutor()"><span class="las la-lock"></span><span>Password</span></a>
+                </li>
+                <li>
+                    <a onclick="SoporteTutor()"><span class="las la-universal-access"></span><span>Soporte</span></a>
+                </li>
+                <li>
+                    <a href="../../index.html"><span class="las la-door-closed"></span><span>Cerrar Sesion</span></a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="main">
+        <header>
+            <h2>
+                <label for="hamburguesa">
+                    <span class="las la-bars"></span>
+                </label> Tutor
+            </h2>
+            <div class="seccion-usuario">
+                <img src="../../css/img/tutor.png" width="30px" height="30px" alt="">
+                <div>
+                    <h4>Tutor</h4>
+                    <small>NombreTutor</small>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="tarjetas-index">
+                <button class="tarjeta-gral" onclick=ExitPetition()>
+                    <div>
+                        <h1>Solicitar Salida</h1>
+                        <span class="las la-door-open"></span><span>Solicite la salida del alumno(s)</span>
+                    </div>
+                    <div>
+                        <span class="las la-door-open"></span>
+                    </div>
+                </button>
+            </div>
+            <div id="alumno_container">
+                <div class="contenido-gral-grid">
+                    <div class="contenido">
+                        <div class="tarjeta-contenido">
+                            <div class="tarjeta-contenido-header">
+                                <h3>Alumno</h3>
+                                <button id="est_alumno">Estatus<span class="las la-rss"></span></button>
+                            </div>
+                            <div class="tarjeta-contenido-body">
+                                <div class="table-responsive">
+                                    <table width="100%" id="table_alumnos">
+                                        <thead>
+                                            <tr>
+                                                <td>Apellido Paterno</td>
+                                                <td>Apellido Materno</td>
+                                                <td>Nombre</td>
+                                                <td>Grupo</td>
+                                                <td>Profesor </td>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tarjetas-alumnos">
+                    <button class="tarjeta-gral" onclick=Confirm()>
+                        <div>
+                            <h1>Confirmar LLegada</h1>
+                            <span class="las la-check-double"></span><span>Confirme la llegada del Alumno</span>
+                        </div>
+                        <div>
+                            <span class="las la-check-double"></span>
+                        </div>
+                    </button>
+                    <button class="tarjeta-gral" onclick=Emergency()>
+                        <div>
+                            <h1>EMERGENCIA</h1>
+                            <span class="las la-exclamation"></span><span>Emergencia</span>
+                        </div>
+                        <div>
+                            <span class="las la-exclamation"></span>
+                        </div>
+                    </button>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>
