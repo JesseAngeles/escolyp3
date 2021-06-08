@@ -1,6 +1,6 @@
 const { io } = require('../server');
 
-const { DBUsuario } = require('../DBConnection/DBUsuario')
+/*const { DBUsuario } = require('../DBConnection/DBUsuario')
 const Usuario = new DBUsuario();
 
 const { DBAlumno } = require('../DBConnection/DBAlumno')
@@ -13,10 +13,10 @@ const { Password } = require('../Password')
 const password = new Password();
 
 const { Mailer } = require('../Mailer');
-const mail = new Mailer();
+const mail = new Mailer();*/
 
 class AdministradorSocket {
-
+/*
     //USUARIOS
 
     //Crear usuario
@@ -277,6 +277,7 @@ class AdministradorSocket {
         }))
         return callback(validation);
     }
+    */
 }
 
 module.exports = {
