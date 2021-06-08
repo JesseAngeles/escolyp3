@@ -1,5 +1,23 @@
+/*
+⠄⠄⠄⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄   ____________________
+⠄⠄⠄⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄⠸⢀⣿⠄   |                   |
+⠄⠄⢀⡋⣡⣴⣶⣶⡀⠄⠄⠙⢿⣿⣿⣿⣿⣿⣴⣿⣿⣿⢃⣤⣄⣀⣥⣿⣿⠄   |      S-SENPAI     |
+⠄⠄⢸⣇⠻⣿⣿⣿⣧⣀⢀⣠⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⣿⣿⣿⠄   |    YOUR CODE IS   |
+⠄⢀⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋⣰   |      VERY BIG     |
+⠄⣼⣖⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⢇⣿⣿⡷⠶⠶⢿⣿⣿⠇⢀⣤   |                   |
+⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣷⣶⣥⣴⣿⡗   /.:_________________|
+⢀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠄
+⢸⣿⣦⣌⣛⣻⣿⣿⣧⠙⠛⠛⡭⠅⠒⠦⠭⣭⡻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠄
+⠘⣿⣿⣿⣿⣿⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠹⠈⢋⣽⣿⣿⣿⣿⣵⣾⠃⠄
+⠄⠘⣿⣿⣿⣿⣿⣿⣿⣿⠄⣴⣿⣶⣄⠄⣴⣶⠄⢀⣾⣿⣿⣿⣿⣿⣿⠃⠄⠄
+⠄⠄⠈⠻⣿⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⠄⣿⣿⡀⣾⣿⣿⣿⣿⣛⠛⠁⠄⠄⠄
+⠄⠄⠄⠄⠈⠛⢿⣿⣿⣿⠁⠞⢿⣿⣿⡄⢿⣿⡇⣸⣿⣿⠿⠛⠁⠄⠄⠄⠄⠄
+⠄⠄⠄⠄⠄⠄⠄⠉⠻⣿⣿⣾⣦⡙⠻⣷⣾⣿⠃⠿⠋⠁⠄⠄⠄⠄⠄⢀⣠⣴
+⣿⣿⣿⣶⣶⣮⣥⣒⠲⢮⣝⡿⣿⣿⡆⣿⡿⠃⠄⠄⠄⠄⠄⠄⠄⣠⣴⣿⣿⣿
+NICE
+*/
+
 const { io } = require('../server');
-const { Conexion } = require('../sentencias/sen_conexion');
 
 const { UsuarioSocket } = require('./UsuarioSocket')
 const Usuario = new UsuarioSocket();
@@ -22,7 +40,7 @@ io.on('connection', (client) => {
 
 
     /*
-    INICIOS DE SESION
+    LOGIN
     */
 
     client.on('LoginUsuario', (usuario, callback) => {
@@ -31,31 +49,36 @@ io.on('connection', (client) => {
         })
     })
 
+    client.on('LoginByTokenUsuario', (token, callback) => {
+        Usuario.LoginByToken(token, (loged_usuario) => {
+            return callback(loged_usuario);
+        })
+    })
 
-    /* 
-    DIRECCION: FUNCIONES DE SOPORTE
-    */
+    client.on('ValidateUsuario', (usu_id, callback) => {
+        Usuario.Validate(usu_id, (validated_usuario) => {
+            return callback(validated_usuario);
+        })
+    })
 
-    client.on('SoporteConnection', (callback) => {
-        Soporte.GetAllReports((reports) => {
-            if (reports) {
-                return callback(reports);
+    client.on('ChangePassword', (usu_id, usu_con, new_usu_con, callback) => {
+        Usuario.ChangePassword(usu_id, usu_con, new_usu_con, (changed_password) => {
+            return callback(changed_password);
+        })
+    })
+
+    // * Registra a un nuevo profesor
+    client.on('createUsuario', (usuario, callback) => {
+        Usuario.CreateUsuario(usuario, (new_profesor) => {
+            if (new_profesor) {
+                io.emit('lastCreateProfesor', new_profesor);
+                return callback(new_profesor);
             } else {
                 return callback(false);
             }
         })
-    })
+    });
 
-    client.on('CreateReport', (report, callback) => {
-        Usuario.CreateReport(report, (create_report) => {
-            if (create_report) {
-                io.emit('LastCreateReport', report);
-                return callback(create_report);
-            } else {
-                return callback(false);
-            }
-        })
-    })
 
     /*
      * * DIRECCION: FUNCIONES CORRECTIVAS  
@@ -75,7 +98,7 @@ io.on('connection', (client) => {
         })
     })
 
-     /*
+    /*
      * * DIRECCION: FUNCIONES DE PROFESORES
      */
 
@@ -156,9 +179,9 @@ io.on('connection', (client) => {
 
     // * Elimina a un profesor
     client.on('deleteProfesor', (profesor, callback) => {
-        Administrador.DeleteUsuario(profesor, (delete_profesor) => {    
+        Administrador.DeleteUsuario(profesor, (delete_profesor) => {    //Elimina al profesor de la base de datos
             if (delete_profesor) {
-                io.emit('lastDeleteProfesor', delete_profesor);         
+                io.emit('lastDeleteProfesor', delete_profesor);         //Socket de profesor eliminado
                 return callback(delete_profesor);
             } else {
                 return callback(false);
@@ -274,7 +297,7 @@ io.on('connection', (client) => {
         })
     })
 
-     /*
+    /*
     DIRECCION: FUNCIONES DE GRUPOS
     */
 
@@ -374,6 +397,106 @@ io.on('connection', (client) => {
     client.on('deleteGrupo', (gru_id, callback) => {
         Administrador.DeleteGrupo(gru_id, (res) => {
             return callback(res);
+        })
+    })
+
+    /* 
+    DIRECCION: FUNCIONES DE SOPORTE
+    */
+
+    client.on('SoporteConnection', (callback) => {
+        Soporte.GetAllReports((reports) => {
+            if (reports) {
+                return callback(reports);
+            } else {
+                return callback(false);
+            }
+        })
+    })
+
+    client.on('CreateReport', (report, callback) => {
+        Usuario.CreateReport(report, (create_report) => {
+            if (create_report) {
+                io.emit('LastCreateReport', report);
+                return callback(create_report);
+            } else {
+                return callback(false);
+            }
+        })
+    })
+
+    /* 
+    PROFESOR: FUNCIONES LISTA
+    */
+
+    client.on('ProfesorListaConecction', (usu_id, callback) => {
+        Profesor.GetAlumnosByGrupo(usu_id, (grupo, alumnos) => {
+            return callback(grupo, alumnos);
+        })
+    })
+
+
+    client.on('ProfesorCheckFunctions', (callback) => {
+        Profesor.CheckFunctions((flag) => {
+            return callback(flag);
+        })
+    })
+
+    /*
+    TUTOR: FUNCIONES SOLICITUD
+    */
+
+    client.on('TutorSolicitudConecction', (id, callback) => {
+        Tutor.GetAlumnosByTutor(id, (grupos, alumno, profesor) => {
+            return callback(grupos, alumno, profesor);
+        })
+    })
+
+    /*
+    ALUMNOS: CAMBIO DE ESTATUS
+    */
+
+    //1 a 2 y 2 a 1
+    client.on('ListChangeAlumno', (alu_id, est_id, callback) => {
+        Profesor.ListChangeAlumno(alu_id, est_id, (new_est_id) => {
+            io.emit('LastUpdateStatus', alu_id, new_est_id);
+            return callback(new_est_id);
+        })
+    })
+
+    //2 a 3
+    client.on('ExitPetitionAlumno', (alu_id, est_id, callback) => {
+        Tutor.ExitPetitionAlumno(alu_id, est_id, (new_est_id) => {
+            io.emit('LastUpdateStatus', alu_id, new_est_id);
+            return callback(new_est_id)
+        })
+    })
+
+    //3 a 4
+    client.on('ExitAlumno', (alu_id, est_id, callback) => {
+        Profesor.ExitAlumno(alu_id, est_id, (new_est_id) => {
+            io.emit('LastUpdateStatus', alu_id, new_est_id);
+            return callback(new_est_id);
+        })
+    })
+
+    //4 a 1 y 5 a 1
+    client.on('ConfirmExitAlumno', (alu_id, est_id, callback) => {
+        Tutor.ConfirmExitAlumno(alu_id, est_id, (new_est_id, flag) => {
+            if (flag) {
+                io.emit('UnlockFunctions', flag);
+            }
+            io.emit('LastUpdateStatus', alu_id, new_est_id);
+            return callback(new_est_id)
+        })
+    })
+
+    //3 a 5
+    client.on('EmergencyAlumno', (alu_id, est_id, callback) => {
+        Tutor.EmergencyAlumno(alu_id, est_id, (new_est_id) => {
+            io.emit('LastUpdateStatus', alu_id, new_est_id);
+            io.emit('Emergency', alu_id);
+            return callback(new_est_id);
         })
     })
 
