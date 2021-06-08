@@ -1,7 +1,7 @@
-/*const { DBUsuario } = require('../DBConnection/DBUsuario')
+const { DBUsuario } = require('../DBConnection/DBUsuario')
 const Usuario = new DBUsuario();
 
-const { DBForo } = require('../DBConnection/DBForo')
+/*const { DBForo } = require('../DBConnection/DBForo')
 const Foro = new DBForo();
 
 const { Mailer } = require('../Mailer');
@@ -13,15 +13,14 @@ const password = new Password();*/
 class UsuarioSocket {
 
     Login(usuario, callback) {
-        /*Usuario.LoginUsuario(usuario.usu_cor, usuario.usu_con, (err, res) => {
+        Usuario.LoginUsuario(usuario.usu_cor, usuario.usu_con, (err, res) => {
             if (err) {
                 return callback(false);
             } else {
                 console.log(res);
                 return callback(res);
             }
-        })*/
-        return callback(usuario);
+        })
     }
 
 
