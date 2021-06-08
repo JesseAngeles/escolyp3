@@ -144,7 +144,113 @@ io.on('connection', (client) => {
         })
     })
 
+    /*
+    DIRECCION: FUNCIONES DE ALUMNOS Y TUTORES
+    */
 
+    // * Conexion de dirección con la interfaz de alumno
+    client.on('direccionAlumnoConnection', (callback) => {
+        Administrador.GetAllAlumnos((alumnos) => {
+            if (alumnos) {
+                Administrador.GetAllGrupos((grupos) => {
+                    if (grupos) {
+                        return callback(alumnos, grupos);
+                    } else {
+                        return callback(false);
+                    }
+                })
+            } else {
+                return callback(false);
+            }
+        })
+    })
+
+    // * Conexion de direccion con la interfaz de editar alumnos
+    client.on('direccionAlumnoEditarConnection', (alu_id, callback) => {
+        Administrador.GetByIdAlumno(alu_id, (alumno) => {
+            if (alumno) {
+                Administrador.GetByIdUsuario(alumno.usu_id, (usuario) => {
+                    if (usuario) {
+                        Administrador.GetAllGrupos((grupos) => {
+                            if (grupos) {
+                                return callback(alumno, usuario, grupos);
+                            } else {
+                                return callback(false);
+                            }
+                        })
+                    } else {
+                        return callback(false);
+                    }
+                })
+            } else {
+                return callback(false);
+            }
+        })
+    })
+
+    // * Registra un nuevo alumno
+    client.on('createAlumnoTutor', (alumno, usuario, callback) => {
+        Administrador.CreateUsuario(usuario, (new_tutor) => {
+            if (new_tutor) {
+                Administrador.CreateAlumno(new_tutor.usu_id, alumno, (new_alumno) => {
+                    if (new_alumno) {
+                        io.emit('lastCreateAlumno', new_alumno);
+                        return callback(new_alumno);
+                    } else {
+                        return callback(false);
+                    }
+                })
+            } else {
+                return callback(false);
+            }
+        })
+    })
+
+    // * Actualiza la informacion del alumno
+    client.on('updateAlumno', (alumno, tutor, changed_email, callback) => {
+        Administrador.UpdateAlumno(alumno, (update_alumno) => {
+            if (update_alumno) {
+                Administrador.UpdateUsuario(tutor, changed_email, (update_tutor) => {
+                    if (update_tutor) {
+                        io.emit('lastUpdateAlumno', update_alumno);
+                        return callback(true);
+                    } else {
+                        setTimeout(function () {
+                            return callback(false);
+                        }, 400);
+                    }
+                })
+            } else {
+                setTimeout(function () {
+                    return callback(false);
+                }, 400);
+            }
+        })
+    })
+
+    // * Elimina a un alumno
+    client.on('deleteAlumno', (alumno, tutor, callback) => {
+        Administrador.DeleteAlumno(alumno, (res) => {
+            if (res) {
+                console.log(tutor);
+                Administrador.DeleteUsuario(tutor, (res2) => {
+                    console.log(res2);
+                    if (res2) {
+                        io.emit('lastDeleteAlumno', res);
+                        return callback(res);
+                    } else {
+                        setTimeout(function () {
+                            return callback(false);
+                        }, 400);
+                    }
+                })
+            } else {
+                setTimeout(function () {
+                    return callback(false);
+                }, 400);
+            }
+        })
+    })
 
 
 
