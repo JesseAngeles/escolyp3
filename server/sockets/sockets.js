@@ -7,6 +7,12 @@ const Usuario = new UsuarioSocket();
 const { AdministradorSocket } = require('./AdministradorSocket')
 const Administrador = new AdministradorSocket();
 
+const { ProfesorSocket } = require('./ProfesorSocket')
+const Profesor = new ProfesorSocket();
+
+const { TutorSocket } = require('./TutorSocket')
+const Tutor = new TutorSocket();
+
 const { SoporteSocket } = require('./SoporteSocket')
 const Soporte = new SoporteSocket();
 
