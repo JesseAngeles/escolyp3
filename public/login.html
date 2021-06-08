@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel='stylesheet' type='text/css' media='screen' href='css/cssindex.css'>
+
+    <title>Index</title>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="js/login.js"></script>
+</head>
+
+<body class="body3">
+
+    <div class="contenedor">
+        <div class="Login" id="login">
+            <p class="titulo">
+                Iniciar Sesion
+            </p>
+            <input type="text" id="EmailUsuario" value="" placeholder="Correo Electronico" autofocus required>
+            <input type="password" id="PasswordUsuario" value="" placeholder="Password" required autofocus>
+            <button onclick="Login()">Iniciar Sesion</button>
+            
+            
+        </div>
+        <div>
+            <button onclick="Token()" id="btn_token">Olvidaste tu password??</button> 
+        </div>
+    </div>
+</body>
+
+</html>
