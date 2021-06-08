@@ -17,7 +17,7 @@ class DBUsuario {
         connection.end();
     }
 
-    /*LoginByToken(usu_tok, callback) {
+    LoginByToken(usu_tok, callback) {
         var connection = new Connection();
         connection = connection.createTheConnection();
 
@@ -167,7 +167,7 @@ class DBUsuario {
                 return callback(null, true);
             }
         })
-    }*/
+    }
 }
 
 module.exports = {
