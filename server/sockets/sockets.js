@@ -252,6 +252,109 @@ io.on('connection', (client) => {
         })
     })
 
+     /*
+    DIRECCION: FUNCIONES DE GRUPOS
+    */
+
+    // * Conexion de direccion con la interfaz de administrar grupos
+    client.on('direccionGrupoConnection', (callback) => {
+        Administrador.GetAllGrupos((grupos) => {
+            if (grupos) {
+                return callback(grupos);
+            } else {
+                return callback(false);
+            }
+        })
+    })
+
+    // * Conexion de direccion con la interfaz de informacion grupos 
+    client.on('direccionGrupoInformacionConnection', (gru_id, callback) => {
+        Administrador.GetAlumnosByGrupo(gru_id, (alumnos) => {
+            if (alumnos) {
+                Administrador.GetByIdGrupo(gru_id, (grupo) => {
+                    if (grupo) {
+                        Administrador.GetAllUsuarios(2, (usuarios) => {
+                            usuarios.forEach(usuario => {
+                                if (usuario.usu_id == grupo.usu_id) {
+                                    return callback(alumnos, usuario);
+                                }
+                            });
+                            return callback(alumnos, false);
+                        })
+                    }
+                })
+            }
+        })
+    })
+
+    // * Conexion de direccion con la interfaz de asignar alumnos
+    client.on('direccionGrupoAsignarAlumnoConnection', (callback) => {
+        Administrador.GetAllAlumnos((alumnos) => {
+            if (alumnos) {
+                Administrador.GetAllGrupos((grupos) => {
+                    if (grupos) {
+                        salumnos = [];
+                        alumnos.forEach(alumno => {
+                            if (!alumno.gru_id) {
+                                salumnos.push(alumno);
+                            }
+                        });
+                        return callback(salumnos, grupos);
+                    } else {
+                        return callback(false);
+                    }
+                })
+            } else {
+                return callback(false);
+            }
+        })
+    })
+
+    // * Conexion de direccion con la interfaz de asignar profesores
+    client.on('direccionGrupoAsignarProfesorConnection', (callback) => {
+        Administrador.GetAllUsuarios(2, (usuarios) => {
+            if (usuarios) {
+                Administrador.GetAllGrupos((grupos) => {
+                    if (grupos) {
+                        return callback(usuarios, grupos);
+                    } else {
+                        return callback(false);
+                    }
+                })
+            } else {
+                return callback(false);
+            }
+        })
+    })
+
+    //Asignacion de alumnos a grupos
+    client.on('AssignAlumnos', (alumnos, grupo, callback) => {
+        Administrador.AssignAlumnos(alumnos, grupo, (res) => {
+            return callback(res);
+        })
+    })
+
+    //Asignacion de profesores a grupos
+    client.on('AssignProfesores', (usuarios, grupos, callback) => {
+        Administrador.AssignProfesores(usuarios, grupos, (res) => {
+            return callback(res);
+        })
+    })
+
+    //Creacion de un nuevo grupo
+    client.on('createGrupo', (gru_gra, gru_nom, callback) => {
+        Administrador.CreateGrupo(gru_gra, gru_nom, (res) => {
+            return callback(res);
+        })
+    })
+
+    //Eliminacion permanente de un grupo
+    client.on('deleteGrupo', (gru_id, callback) => {
+        Administrador.DeleteGrupo(gru_id, (res) => {
+            return callback(res);
+        })
+    })
+
 
 
 
