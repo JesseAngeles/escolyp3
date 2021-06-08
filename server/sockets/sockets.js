@@ -35,6 +35,31 @@ io.on('connection', (client) => {
     })
 
 
+    /* 
+    DIRECCION: FUNCIONES DE SOPORTE
+    */
+
+    client.on('SoporteConnection', (callback) => {
+        Soporte.GetAllReports((reports) => {
+            if (reports) {
+                return callback(reports);
+            } else {
+                return callback(false);
+            }
+        })
+    })
+
+    client.on('CreateReport', (report, callback) => {
+        Usuario.CreateReport(report, (create_report) => {
+            if (create_report) {
+                io.emit('LastCreateReport', report);
+                return callback(create_report);
+            } else {
+                return callback(false);
+            }
+        })
+    })
+
     /*
      * * DIRECCION: FUNCIONES CORRECTIVAS  
     */
