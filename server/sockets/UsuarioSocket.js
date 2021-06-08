@@ -24,7 +24,7 @@ class UsuarioSocket {
     }
 
 
-    /*LoginByToken(token, callback) {
+    LoginByToken(token, callback) {
         Usuario.LoginByToken(token, (err, res) => {
             if (err) {
                 return callback(false);
@@ -99,7 +99,6 @@ class UsuarioSocket {
             return callback(err);
         })
     }
-*/
 }
 
 module.exports = {
