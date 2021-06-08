@@ -7,17 +7,8 @@ const Usuario = new UsuarioSocket();
 const { AdministradorSocket } = require('./AdministradorSocket')
 const Administrador = new AdministradorSocket();
 
-const { Administrativos } = require('../sentencias/sen_administrativos');
-const administrativo = new Administrativos();
-
-const { Tutores } = require('../sentencias/sen_tutores');
-const tutor = new Tutores();
-
-const { Profesores } = require('../sentencias/sen_profesores');
-const profesor = new Profesores();
-
-const { Alumnos } = require('../sentencias/sen_alumnos');
-alumno = new Alumnos();
+const { SoporteSocket } = require('./SoporteSocket')
+const Soporte = new SoporteSocket();
 
 io.on('connection', (client) => {
 
