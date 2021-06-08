@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Index Admin</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../../css/administradorResources.css'>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+    <script src="../../socket.io/socket.io.js"></script>
+    <script src='../../js/administrador/ProfesorEditar.js'></script>
+    <script src='../../js/administrador/Navegacion.js'></script>
+</head>
+
+<body>
+    <input type="checkbox" name="" id="hamburguesa">
+    <div class="barra-lateral">
+
+        <div class="lateral-titulo">
+            <span><img src="../../css/img/Logo-Escoly sin letras.png"></span>
+        </div>
+        <div class="menu-lateral">
+            <ul>
+                <li>
+                    <a onclick="index()"><span class="las la-undo"></span><span>Pagina Principal</span></a>
+                </li>
+                <li>
+                    <a onclick="ProfesorAdministrar()" class="activo"><span class="las la-school"></span><span>Profesores</span></a>
+                </li>
+                <li>
+                    <a onclick="GrupoAdministrar()"><span class="las la-clone"></span><span>Grupos</span></a>
+                </li>
+                <li>
+                    <a onclick="AlumnoAdministrar()"><span class="las la-user-graduate"></span><span>Alumnos</span></a>
+                </li>
+                <li>
+                    <a onclick="PasswordAdministrador()"><span class="las la-lock"></span><span>Password</span></a>
+                </li>
+                <li>
+                    <a onclick="SoporteAdministrador()"><span class="las la-universal-access"></span><span>Soporte</span></a>
+                </li>
+                <li>
+                    <a href="../../index.html"><span class="las la-door-closed"></span><span>Cerrar Sesion</span></a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="main">
+        <header>
+            <h2>
+                <label for="hamburguesa">
+                    <span class="las la-bars"></span>
+                </label> Administrador
+            </h2>
+            <div class="seccion-usuario">
+                <img src="../../css/img/administrador.png" width="30px" height="30px" alt="">
+                <div>
+                    <h4>Direccion</h4>
+                    <small>Administrador</small>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="tarjetas-index">
+                <div class="tarjeta-gral-activa">
+                    <div>
+                        <h1>Editar informacion</h1>
+                        <span class="las la-edit"></span><span>Profesor</span>
+                    </div>
+                    <div>
+                        <span class="las la-edit"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="contenido-gral-grid">
+                <div class="contenido">
+                    <div class="tarjeta-contenido">
+                        <div class="tarjeta-contenido-header">
+                            <h3>Profesor</h3>
+                        </div>
+                        <div class="tarjeta-contenido-body">
+                            <div class="table-responsive">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>Profesor</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Nombre del profesor:
+                                                <br>
+                                                <input type="text" name="" id="NombreProfesor" placeholder="Nombre del profesor " class="entradatxt" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Apellido Paterno:
+                                                <br>
+                                                <input type="text" name="" id="ApellidoPProfesor" class="entradatxt" placeholder="Apellido Paterno del profesor" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Apellido Materno:
+                                                <br>
+                                                <input type="text" name="" id="ApellidoMProfesor" class="entradatxt" placeholder="Apellido Materno del profesor" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Email:
+                                                <br>
+                                                <input type="text" name="" id="EmailProfesor" placeholder="Email del profesor" class="entradatxt" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Grupo:
+                                                <br>
+                                                <select name="" id="GrupoProfesor" class="consultar">
+                                                    <option value="">Sin Grupo</option>
+                                                </select>
+
+                                            </td>
+
+
+                                        </tr>
+
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tarjetas-grupos">
+                <a onclick="ProfesorAdministrar()" class="tarjeta-gral">
+                    <div>
+                        <h1>Regresar</h1>
+                        <span class="las la-undo"></span><span>Regresar</span>
+                    </div>
+                    <div>
+                        <span class="las la-undo"></span>
+                    </div>
+                </a>
+                <button class="tarjeta-gral" onclick="UpdateProfesor()">
+                    <div>
+                        <h1>Guardar</h1>
+                        <span class="las la-save"></span><span>Guardar</span>
+                    </div>
+                    <div>
+                        <span class="las la-save"></span>
+                    </div>
+                </button>
+                <button class="tarjeta-gral" onclick="DeleteProfesor()">
+                    <div>
+                        <h1>Dar de baja</h1>
+                        <span class="las la-ban"></span><span>Dar de baja</span>
+                    </div>
+                    <div>
+                        <span class="las la-ban"></span>
+                    </div>
+                </button>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>
