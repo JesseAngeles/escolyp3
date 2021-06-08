@@ -16,20 +16,6 @@ app.use(express.static(publicPath));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function(req, res) {
-    res.status(404);
-    // respond with html page
-    if (req.accepts('html')) {
-        res.json('404', {
-            'ERROR 404': 'La pagina que esta buscanda no existe o se pudo encontrar',
-            'ESTADO': 'TuT'
-        });
-        return;
-    }
-
-});
-
-
 //IO = esta es la comunicación del backend
 module.exports.io = socketIO(server);
 require('./sockets/sockets');
