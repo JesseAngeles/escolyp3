@@ -2,10 +2,10 @@ const { io } = require('../server');
 
 /*const { DBUsuario } = require('../DBConnection/DBUsuario')
 const Usuario = new DBUsuario();
-
+*/
 const { DBAlumno } = require('../DBConnection/DBAlumno')
 const Alumno = new DBAlumno();
-
+/*
 const { DBGrupo } = require('../DBConnection/DBGrupo')
 const Grupo = new DBGrupo();
 
@@ -156,7 +156,7 @@ class AdministradorSocket {
             return callback(err);
         })
     }
-
+*/
     //Reinicia el estatus de todos los alumnos
     ResetStatus(callback) {
         Alumno.ResetStatus((err, res) => {
@@ -166,7 +166,7 @@ class AdministradorSocket {
             return callback(res);
         })
     }
-
+/*
     //GRUPOS
 
     //Obtiene todos los grupos

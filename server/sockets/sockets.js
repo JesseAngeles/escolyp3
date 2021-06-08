@@ -35,9 +35,13 @@ io.on('connection', (client) => {
     })
 
 
-    
+    // * Reinicia el estatus de todos los alumnos
+    client.on('ResetStatus', (callback) => {
+        Administrador.ResetStatus((reseted_status) => {
+            return callback(reseted_status);
+        })
+    })
 
-    
 
     client.on('adm_validarUsuario', (data, callback) => {
         if (!data.correo || !data.contrasena) {
